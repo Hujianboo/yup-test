@@ -18,20 +18,17 @@ const SignupSchema = yup.object().shape({
       return true;
     }
   }),
-  lastName: yup
-    .string()
-    .test("lastName", "test", (value, ctx) => {
-      const firstName = ctx.parent.firstName;
-      if (value === "" && firstName === "") {
-        console.log("lastName", value, "current firstname", firstName);
-        return ctx.createError({
-          message: "firstName and lastName can't all be empty",
-        });
-      } else {
-        return true;
-      }
-    })
-    .test("lastName", "test", (value, ctx) => {}),
+  lastName: yup.string().test("lastName", "test", (value, ctx) => {
+    const firstName = ctx.parent.firstName;
+    if (value === "" && firstName === "") {
+      console.log("lastName", value, "current firstname", firstName);
+      return ctx.createError({
+        message: "firstName and lastName can't all be empty",
+      });
+    } else {
+      return true;
+    }
+  }),
 });
 
 export function App() {
